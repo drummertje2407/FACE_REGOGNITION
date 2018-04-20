@@ -29,12 +29,53 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.videofeedBox = new Emgu.CV.UI.ImageBox();
+            this.DetectfaceTimer = new System.Windows.Forms.Timer(this.components);
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.videofeedBox)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // videofeedBox
+            // 
+            this.videofeedBox.Location = new System.Drawing.Point(12, 12);
+            this.videofeedBox.Name = "videofeedBox";
+            this.videofeedBox.Size = new System.Drawing.Size(679, 297);
+            this.videofeedBox.TabIndex = 2;
+            this.videofeedBox.TabStop = false;
+            // 
+            // DetectfaceTimer
+            // 
+            this.DetectfaceTimer.Enabled = true;
+            this.DetectfaceTimer.Interval = 300;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(12, 315);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(249, 184);
+            this.richTextBox1.TabIndex = 3;
+            this.richTextBox1.Text = "";
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(861, 511);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.videofeedBox);
+            this.Name = "Form1";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.videofeedBox)).EndInit();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private Emgu.CV.UI.ImageBox videofeedBox;
+        private System.Windows.Forms.Timer DetectfaceTimer;
+        private System.Windows.Forms.Timer DelayTimer;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
