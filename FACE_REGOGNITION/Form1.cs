@@ -26,11 +26,15 @@ namespace FACE_REGOGNITION
         private CascadeClassifier haar;
         Rectangle[] rectfaces;
         Face_regognition regognition = new Face_regognition();
+        Arduino arduino;
+        List<string> persons =new List<string>();
 
         public delegate void FacedetectedEventHandler(object source, EventArgs e);
         public event FacedetectedEventHandler Facedetected;
         static System.Timers.Timer Dalaytimer;
         public bool TimerhasElapsed = true;
+
+        
 
         public Form1()
         {
@@ -104,45 +108,44 @@ namespace FACE_REGOGNITION
                 TimerhasElapsed = false;
             }
         }
+        
 
         private void KairosRegogniseface(object sender, EventArgs arg)
         {
             
             var response = regognition.Recognizeface(Frame); //actual apirequest
             var rootob = JsonConvert.DeserializeObject<RootObject>(response); //handles the json data ----> puts it inside (C#) classes
-            if (rootob.images != null)
-                
+            if (rootob.images != null && rootob.images[0].candidates != null)  
             {
-                for (int i =0; i<rootob.images[0].candidates.Count; i++)
+                
+                for (wint i =0; i<rootob.images[0].candidates.Count; i++)
                 {
                     if(i<1||rootob.images[0].candidates[i].subject_id != rootob.images[0].candidates[i-1].subject_id)
                     {
                         richTextBox1.Text += rootob.images[0].candidates[i].subject_id + "\n";
+
+                        persons.Add(rootob.images[0].candidates[i].subject_id);
                     }  
                 }
+
+                arduino.Faceregogniced(persons);
             }
 
         }
 
-        private void subjectBindingNavigatorSaveItem_Click(object sender, EventArgs e)
-        {
-            this.Validate();
-            this.subjectBindingSource.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.subjectIDsDataSet);
-
-        }
+      
 
         private void Form1_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'subjectIDsDataSet.subject' table. You can move, or remove it, as needed.
             this.subjectTableAdapter.Fill(this.subjectIDsDataSet.subject);
-            
+            arduino = new Arduino(subjectTableAdapter.GetData());
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Arduino arduino = new Arduino();
-            arduino.Authenticate("fynn");
+            
+            
         }
     }
    

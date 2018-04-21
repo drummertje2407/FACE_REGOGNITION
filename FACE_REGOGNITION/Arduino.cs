@@ -11,15 +11,16 @@ using System.Data.SqlClient;
 
 namespace FACE_REGOGNITION
 {
-    class Arduino : Form1
+    class Arduino 
     {
-        SqlConnection Database = new SqlConnection();
 
-        SerialPort currentPort;
+        System.Data.DataTable sql; 
+        public SerialPort currentPort;
         bool portFound;
 
-        public Arduino()
+        public Arduino(System.Data.DataTable Sql)
         {
+            sql = Sql;
             try
             {
                 string[] ports = SerialPort.GetPortNames();
@@ -83,16 +84,63 @@ namespace FACE_REGOGNITION
             }
         }
 
-        public void Authenticate(string subject_ID)
+        private bool Authenticate(string subject_ID)
         {
-          var sql =  subjectTableAdapter.GetData();
+            
+            string code = sql.Rows.Find(subject_ID)["Code"].ToString();
+            switch (code)
+            {
+                case "Green":
+                    return true;
+                case "red":
+                    return false;
+                default:
+                    return false;
+            }
         }
+        public void Faceregogniced(List<string> subjects)
+        {
+            bool Clearence = false;
+            foreach(string s in subjects)
+            {
+                if(Authenticate(s) == false)
+                {
+                    Clearence = false;
+                }
+                else
+                {
+                    Clearence = true;
+                }
+            }
+            if (Clearence)
+            {
+                Opendoor();
+            }
+        }
+        public void Opendoor()
+        {
+            try
+            {
+                currentPort.Open();
+                currentPort.Write("opendoor");
+                Thread.Sleep(1500);
+                currentPort.Close();
+            }
+            catch { }
+          
+            
+        }
+
+        public void CloseDoor()
+        {
+            currentPort.Open();
+            currentPort.Write("opendoor");
+            Thread.Sleep(1000);
+        }
+
     }
 
-    static class door
-    {
-
-    }
+    
 }
 /*---------ARDUINO CODE----------
             
