@@ -118,7 +118,7 @@ namespace FACE_REGOGNITION
             if (rootob.images != null && rootob.images[0].candidates != null)  
             {
                 
-                for (wint i =0; i<rootob.images[0].candidates.Count; i++)
+                for (int i =0; i<rootob.images[0].candidates.Count; i++)
                 {
                     if(i<1||rootob.images[0].candidates[i].subject_id != rootob.images[0].candidates[i-1].subject_id)
                     {
