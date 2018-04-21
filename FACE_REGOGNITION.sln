@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FACE_REGOGNITION", "FACE_REGOGNITION\FACE_REGOGNITION.csproj", "{6140F890-450E-4597-AD5F-B9E25BD04A28}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Classtesting", "Classtesting\Classtesting.csproj", "{0BA71048-B4C5-47D6-8B79-C6F00D2E57BB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{6140F890-450E-4597-AD5F-B9E25BD04A28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6140F890-450E-4597-AD5F-B9E25BD04A28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6140F890-450E-4597-AD5F-B9E25BD04A28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BA71048-B4C5-47D6-8B79-C6F00D2E57BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BA71048-B4C5-47D6-8B79-C6F00D2E57BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BA71048-B4C5-47D6-8B79-C6F00D2E57BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BA71048-B4C5-47D6-8B79-C6F00D2E57BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

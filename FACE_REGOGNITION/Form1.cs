@@ -8,10 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Timers;
+using System.Configuration;
 using Emgu.CV;
 using Emgu.Util;
 using Emgu.CV.Structure;
 using Newtonsoft.Json; // json convertion
+
 
 
 namespace FACE_REGOGNITION
@@ -109,6 +111,7 @@ namespace FACE_REGOGNITION
             var response = regognition.Recognizeface(Frame); //actual apirequest
             var rootob = JsonConvert.DeserializeObject<RootObject>(response); //handles the json data ----> puts it inside (C#) classes
             if (rootob.images != null)
+                
             {
                 for (int i =0; i<rootob.images[0].candidates.Count; i++)
                 {
@@ -118,11 +121,29 @@ namespace FACE_REGOGNITION
                     }  
                 }
             }
+
         }
 
-       
+        private void subjectBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        {
+            this.Validate();
+            this.subjectBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.subjectIDsDataSet);
 
-        
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'subjectIDsDataSet.subject' table. You can move, or remove it, as needed.
+            this.subjectTableAdapter.Fill(this.subjectIDsDataSet.subject);
+            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Arduino arduino = new Arduino();
+            arduino.Authenticate("fynn");
+        }
     }
    
 
