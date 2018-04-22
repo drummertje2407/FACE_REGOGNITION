@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FACE_REGOGNITION
 {
-    public class Candidate
+    public class Candidate 
     {
         public double confidence { get; set; }
         public string enrollment_timestamp { get; set; }
@@ -31,7 +31,7 @@ namespace FACE_REGOGNITION
         public int width { get; set; }
         public int yaw { get; set; }
     }
-    public class Img
+    public class Img 
     {
         public List<Candidate> candidates { get; set; }
         public Transaction transaction { get; set; }

@@ -25,9 +25,9 @@ namespace FACE_REGOGNITION
         Image<Bgr, byte> ImageFrame;
         private CascadeClassifier haar;
         Rectangle[] rectfaces;
-        Face_regognition regognition = new Face_regognition();
-        Arduino arduino;
-        List<string> persons =new List<string>();
+        Faceregognition faceregognition;
+
+        
 
         public delegate void FacedetectedEventHandler(object source, EventArgs e);
         public event FacedetectedEventHandler Facedetected;
@@ -103,6 +103,7 @@ namespace FACE_REGOGNITION
                 if (Facedetected != null)
                 {
                     Facedetected(this, EventArgs.Empty);
+                    faceregognition.RegognitionHandler(Frame);
                 }
                 Dalaytimer.Start();
                 TimerhasElapsed = false;
@@ -113,24 +114,7 @@ namespace FACE_REGOGNITION
         private void KairosRegogniseface(object sender, EventArgs arg)
         {
             
-            var response = regognition.Recognizeface(Frame); //actual apirequest
-            var rootob = JsonConvert.DeserializeObject<RootObject>(response); //handles the json data ----> puts it inside (C#) classes
-            if (rootob.images != null && rootob.images[0].candidates != null)  
-            {
-                
-                for (int i =0; i<rootob.images[0].candidates.Count; i++)
-                {
-                    if(i<1||rootob.images[0].candidates[i].subject_id != rootob.images[0].candidates[i-1].subject_id)
-                    {
-                        richTextBox1.Text += rootob.images[0].candidates[i].subject_id + "\n";
-
-                        persons.Add(rootob.images[0].candidates[i].subject_id);
-                    }  
-                }
-
-                arduino.Faceregogniced(persons);
-            }
-
+           
         }
 
       
@@ -139,7 +123,8 @@ namespace FACE_REGOGNITION
         {
             // TODO: This line of code loads data into the 'subjectIDsDataSet.subject' table. You can move, or remove it, as needed.
             this.subjectTableAdapter.Fill(this.subjectIDsDataSet.subject);
-            arduino = new Arduino(subjectTableAdapter.GetData());
+            faceregognition = new Faceregognition(subjectTableAdapter.GetData());
+            
         }
 
         private void button1_Click(object sender, EventArgs e)

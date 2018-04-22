@@ -14,13 +14,13 @@ namespace FACE_REGOGNITION
     class Arduino 
     {
 
-        System.Data.DataTable sql; 
+         
         public SerialPort currentPort;
         bool portFound;
 
-        public Arduino(System.Data.DataTable Sql)
+        public Arduino()
         {
-            sql = Sql;
+           
             try
             {
                 string[] ports = SerialPort.GetPortNames();
@@ -58,7 +58,7 @@ namespace FACE_REGOGNITION
                 char charReturnValue = (Char)intReturnASCII;
                 currentPort.Open();
                 currentPort.Write(buffer, 0, 5);
-                Thread.Sleep(1000);
+                Thread.Sleep(200);
                 int count = currentPort.BytesToRead;
                 string returnMessage = "";
                 while (count > 0)
@@ -84,46 +84,15 @@ namespace FACE_REGOGNITION
             }
         }
 
-        private bool Authenticate(string subject_ID)
-        {
-            
-            string code = sql.Rows.Find(subject_ID)["Code"].ToString();
-            switch (code)
-            {
-                case "Green":
-                    return true;
-                case "red":
-                    return false;
-                default:
-                    return false;
-            }
-        }
-        public void Faceregogniced(List<string> subjects)
-        {
-            bool Clearence = false;
-            foreach(string s in subjects)
-            {
-                if(Authenticate(s) == false)
-                {
-                    Clearence = false;
-                }
-                else
-                {
-                    Clearence = true;
-                }
-            }
-            if (Clearence)
-            {
-                Opendoor();
-            }
-        }
+       
+        
         public void Opendoor()
         {
             try
             {
                 currentPort.Open();
                 currentPort.Write("opendoor");
-                Thread.Sleep(1500);
+                Thread.Sleep(200);
                 currentPort.Close();
             }
             catch { }
@@ -135,7 +104,7 @@ namespace FACE_REGOGNITION
         {
             currentPort.Open();
             currentPort.Write("opendoor");
-            Thread.Sleep(1000);
+            Thread.Sleep(200);
         }
 
     }

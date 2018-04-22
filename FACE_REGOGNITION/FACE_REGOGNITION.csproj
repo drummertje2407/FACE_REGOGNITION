@@ -82,9 +82,10 @@
   <ItemGroup>
     <Compile Include="Arduino.cs" />
     <Compile Include="Class1.cs" />
-    <Compile Include="Face regognition.cs">
+    <Compile Include="apiRequest.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Faceregognition.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

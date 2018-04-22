@@ -18,16 +18,13 @@ using RestSharp;
 
 namespace FACE_REGOGNITION
 {
-    class Face_regognition
+    class Apirequest
     {
         private string appID = "e70fd410";
         private string appKEY = "48ac815082bb94799792fe32c4ecf241";
 
 
-        public Face_regognition()
-        {
-
-        }
+       
 
         //detect method
         public string add_User(Image<Bgr, byte> image, string username, string galleryname)
@@ -44,6 +41,7 @@ namespace FACE_REGOGNITION
             request.AddHeader("app_key", appKEY);
             var response = client.Execute(request);//execute request
             return response.Content.ToString();
+            
         }
 
 
